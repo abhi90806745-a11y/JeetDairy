@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeet Dairy - Fresh & Pure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8EE;
+    --warm-white: #FFFDF7;
+    --gold: #D4A017;
+    --gold-light: #F0C040;
+    --brown: #5C3D1E;
+    --brown-light: #8B5E3C;
+    --green: #2E7D32;
+    --green-light: #4CAF50;
+    --blue: #1565C0;
+    --red: #C62828;
+    --text-dark: #2C1810;
+    --text-mid: #5A3825;
+    --shadow: 0 8px 32px rgba(92,61,30,0.15);
+    --shadow-hover: 0 16px 48px rgba(92,61,30,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,248,238,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    box-shadow: 0 2px 20px rgba(212,160,23,0.2);
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 45px; height: 45px;
+    background: linear-gradient(135deg, var(--gold), var(--brown));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 3px 12px rgba(212,160,23,0.4);
+  }
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--brown);
+    line-height: 1;
+  }
+  .logo-text span { color: var(--gold); }
+  .logo-sub { font-size: 0.65rem; color: var(--brown-light); letter-spacing: 2px; text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-weight: 600; font-size: 0.95rem;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--brown); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-order-btn {
+    background: linear-gradient(135deg, var(--gold), var(--brown));
+    color: white; border: none; padding: 10px 22px;
+    border-radius: 25px; font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    transition: all 0.3s; box-shadow: 0 4px 15px rgba(212,160,23,0.4);
+  }
+  .nav-order-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,160,23,0.5); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 25px; height: 3px; background: var(--brown); border-radius: 3px; transition: 0.3s; }
+
+  /* ===== HERO ===== */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #FFF8EE 0%, #FFF3D6 50%, #FFE8B0 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+
+  #home::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212,160,23,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  #home::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(46,125,50,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content { flex: 1; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    color: white; padding: 6px 18px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 20px;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--brown); margin-bottom: 20px;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+  .hero-title .highlight {
+    color: var(--gold);
+    text-shadow: 2px 2px 0 rgba(212,160,23,0.2);
+  }
+  .hero-desc {
+    font-size: 1.1rem; color: var(--text-mid);
+    line-height: 1.7; max-width: 500px; margin-bottom: 35px;
+    animation: fadeInUp 0.8s ease 0.4s both;
+  }
+  .hero-btns {
+    display: flex; gap: 15px; flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease 0.6s both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #B8860B);
+    color: white; padding: 14px 32px; border-radius: 30px;
+    font-weight: 700; font-size: 1rem; text-decoration: none;
+    box-shadow: 0 6px 20px rgba(212,160,23,0.4);
+    transition: all 0.3s; border: none; cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,160,23,0.5); }
+
+  .btn-secondary {
+    background: transparent; color: var(--brown);
+    padding: 14px 32px; border-radius: 30px;
+    font-weight: 700; font-size: 1rem; text-decoration: none;
+    border: 2px solid var(--brown); transition: all 0.3s;
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+  }
+  .btn-secondary:hover { background: var(--brown); color: white; }
+
+  .hero-visual {
+    flex: 1; display: flex; justify-content: center; align-items: center;
+    position: relative; z-index: 1;
+    animation: fadeInRight 1s ease 0.3s both;
+  }
+
+  .hero-circle {
+    width: 350px; height: 350px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,248,238,0.7));
+    border: 3px solid rgba(212,160,23,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    box-shadow: 0 20px 60px rgba(212,160,23,0.2), inset 0 0 40px rgba(255,255,255,0.5);
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+  }
+
+  .hero-stats {
+    position: absolute; display: flex; flex-direction: column; gap: 15px;
+  }
+  .stat-card {
+    background: white; border-radius: 15px; padding: 12px 18px;
+    box-shadow: var(--shadow); display: flex; align-items: center; gap: 10px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .stat-card:nth-child(1) { margin-left: -220px; animation-delay: 0.5s; }
+  .stat-card:nth-child(2) { margin-left: 200px; margin-top: -30px; animation-delay: 1s; }
+  .stat-card:nth-child(3) { margin-left: -180px; animation-delay: 1.5s; }
+  .stat-icon { font-size: 1.8rem; }
+  .stat-num { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; color: var(--brown); }
+  .stat-label { font-size: 0.75rem; color: var(--brown-light); }
+
+  /* ===== SECTIONS GENERAL ===== */
+  section { padding: 80px 5%; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; color: var(--brown); margin-bottom: 8px;
+    text-align: center;
+  }
+  .section-subtitle {
+    text-align: center; color: var(--brown-light);
+    font-size: 1rem; margin-bottom: 50px;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+  .gold-line {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    margin: 12px auto 20px; border-radius: 2px;
+  }
+
+  /* ===== PRODUCTS ===== */
+  #products { background: var(--warm-white); }
+
+  .filter-tabs {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 40px;
+  }
+  .filter-btn {
+    padding: 8px 22px; border-radius: 20px;
+    border: 2px solid var(--gold); background: transparent;
+    color: var(--brown); font-family: 'Nunito', sans-serif;
+    font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 0.9rem;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--gold); color: white;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .product-card {
+    background: white; border-radius: 20px;
+    overflow: hidden; box-shadow: var(--shadow);
+    transition: all 0.3s; cursor: pointer;
+    border: 1px solid rgba(212,160,23,0.1);
+  }
+  .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+
+  .product-img {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; position: relative; overflow: hidden;
+  }
+  .product-img.bg-cream { background: linear-gradient(135deg, #FFF8DC, #FFE8A0); }
+  .product-img.bg-blue { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); }
+  .product-img.bg-green { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+  .product-img.bg-orange { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+  .product-img.bg-pink { background: linear-gradient(135deg, #FCE4EC, #F8BBD0); }
+  .product-img.bg-yellow { background: linear-gradient(135deg, #FFFDE7, #FFF9C4); }
+
+  .product-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--green); color: white;
+    font-size: 0.65rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 10px; letter-spacing: 1px;
+  }
+  .product-badge.hot { background: var(--red); }
+  .product-badge.new { background: var(--blue); }
+
+  .product-info { padding: 18px; }
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 1.1rem; color: var(--brown); margin-bottom: 5px;
+  }
+  .product-desc { font-size: 0.82rem; color: var(--brown-light); margin-bottom: 12px; line-height: 1.5; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-weight: 700; font-size: 1.1rem; color: var(--gold); }
+  .product-price span { font-size: 0.75rem; color: var(--brown-light); font-weight: 400; }
+
+  .add-cart-btn {
+    background: linear-gradient(135deg, var(--gold), #B8860B);
+    color: white; border: none; padding: 7px 16px;
+    border-radius: 15px; font-size: 0.8rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s; font-family: 'Nunito', sans-serif;
+  }
+  .add-cart-btn:hover { transform: scale(1.05); }
+
+  /* ===== ORDER SECTION ===== */
+  #order { background: linear-gradient(135deg, #FFF8EE, #FFE8B0); }
+
+  .order-container {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    max-width: 900px; margin: 0 auto;
+  }
+
+  .order-form {
+    background: white; border-radius: 25px; padding: 35px;
+    box-shadow: var(--shadow);
+  }
+  .order-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--brown); margin-bottom: 25px;
+  }
+
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; font-weight: 600; font-size: 0.85rem;
+    color: var(--text-mid); margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 12px 16px;
+    border: 2px solid #E8D5B0; border-radius: 12px;
+    font-family: 'Nunito', sans-serif; font-size: 0.95rem;
+    color: var(--text-dark); background: var(--cream);
+    outline: none; transition: border 0.3s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+  .submit-btn {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--gold), #B8860B);
+    color: white; border: none; border-radius: 15px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    transition: all 0.3s; box-shadow: 0 6px 20px rgba(212,160,23,0.4);
+    margin-top: 10px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,160,23,0.5); }
+
+  .order-info { display: flex; flex-direction: column; gap: 20px; }
+  .info-card {
+    background: white; border-radius: 20px; padding: 25px;
+    box-shadow: var(--shadow); display: flex; gap: 15px; align-items: flex-start;
+  }
+  .info-icon { font-size: 2.2rem; flex-shrink: 0; }
+  .info-title { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--brown); margin-bottom: 5px; }
+  .info-desc { font-size: 0.85rem; color: var(--brown-light); line-height: 1.6; }
+
+  /* ===== ABOUT ===== */
+  #about { background: var(--warm-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-visual {
+    background: linear-gradient(135deg, #FFF3D6, #FFE0A0);
+    border-radius: 30px; height: 400px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem; box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
+  }
+  .about-visual::before {
+    content: '';
+    position: absolute; top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: rgba(212,160,23,0.15); border-radius: 50%;
+  }
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--brown); margin-bottom: 15px;
+  }
+  .about-text p { color: var(--text-mid); line-height: 1.8; margin-bottom: 20px; }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  .feature-item {
+    display: flex; gap: 10px; align-items: center;
+    background: var(--cream); padding: 12px 15px; border-radius: 12px;
+  }
+  .feature-item span:first-child { font-size: 1.5rem; }
+  .feature-item span:last-child { font-weight: 600; font-size: 0.9rem; color: var(--brown); }
+
+  /* ===== CONTACT ===== */
+  #contact { background: linear-gradient(135deg, var(--brown), #3E2010); color: white; }
+  #contact .section-title { color: var(--gold-light); }
+  #contact .section-subtitle { color: rgba(255,255,255,0.7); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  .contact-form {
+    background: rgba(255,255,255,0.07); border-radius: 25px; padding: 35px;
+    backdrop-filter: blur(10px); border: 1px solid rgba(212,160,23,0.3);
+  }
+  .contact-form .form-group label { color: rgba(255,255,255,0.8); }
+  .contact-form .form-group input,
+  .contact-form .form-group textarea {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(212,160,23,0.4); color: white;
+  }
+  .contact-form .form-group input::placeholder,
+  .contact-form .form-group textarea::placeholder { color: rgba(255,255,255,0.4); }
+  .contact-form .form-group input:focus,
+  .contact-form .form-group textarea:focus { border-color: var(--gold-light); }
+
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; gap: 15px; align-items: flex-start;
+    background: rgba(255,255,255,0.07); border-radius: 15px; padding: 20px;
+    border: 1px solid rgba(212,160,23,0.2);
+  }
+  .contact-icon { font-size: 2rem; flex-shrink: 0; }
+  .contact-label { color: var(--gold-light); font-weight: 700; margin-bottom: 3px; }
+  .contact-value { color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.6; }
+
+  /* ===== CART WIDGET ===== */
+  .cart-widget {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    background: linear-gradient(135deg, var(--gold), #B8860B);
+    color: white; border: none; width: 60px; height: 60px;
+    border-radius: 50%; font-size: 1.5rem; cursor: pointer;
+    box-shadow: 0 8px 25px rgba(212,160,23,0.5); transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cart-widget:hover { transform: scale(1.1); }
+  .cart-count {
+    position: absolute; top: -5px; right: -5px;
+    background: var(--red); color: white;
+    width: 22px; height: 22px; border-radius: 50%;
+    font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    display: none;
+  }
+
+  /* ===== CART MODAL ===== */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    z-index: 2000; display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--warm-white); border-radius: 25px;
+    padding: 35px; max-width: 500px; width: 100%;
+    max-height: 80vh; overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px;
+  }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--brown); }
+  .modal-close {
+    background: none; border: none; font-size: 1.5rem; cursor: pointer;
+    color: var(--brown-light); transition: color 0.3s;
+  }
+  .modal-close:hover { color: var(--red); }
+  .cart-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #E8D5B0;
+  }
+  .cart-item-name { font-weight: 600; color: var(--brown); }
+  .cart-item-price { color: var(--gold); font-weight: 700; }
+  .cart-item-remove {
+    background: none; border: none; color: var(--red); cursor: pointer;
+    font-size: 1rem; padding: 3px 8px;
+  }
+  .cart-total {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0 0; font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--brown);
+  }
+  .cart-empty { text-align: center; color: var(--brown-light); padding: 30px; font-size: 3rem; }
+
+  /* ===== SUCCESS TOAST ===== */
+  .toast {
+    position: fixed; bottom: 100px; right: 30px; z-index: 3000;
+    background: var(--green); color: white;
+    padding: 14px 22px; border-radius: 12px;
+    font-weight: 600; box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(100px); opacity: 0; transition: all 0.4s;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #1C0F05; color: rgba(255,255,255,0.6);
+    padding: 40px 5%; text-align: center;
+  }
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--gold); margin-bottom: 10px;
+  }
+  footer p { font-size: 0.85rem; line-height: 1.8; }
+
+  /* ===== MOBILE NAV ===== */
+  .mobile-nav {
+    display: none; position: fixed; top: 70px; left: 0; right: 0;
+    background: var(--cream); border-bottom: 2px solid var(--gold);
+    padding: 20px 5%; z-index: 999;
+    flex-direction: column; gap: 15px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { color: var(--brown); font-weight: 600; text-decoration: none; font-size: 1.1rem; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-links, .nav-order-btn { display: none; }
+    .hamburger { display: flex; }
+    #home { flex-direction: column; text-align: center; }
+    .hero-btns { justify-content: center; }
+    .hero-visual { margin-top: 40px; }
+    .hero-circle { width: 220px; height: 220px; font-size: 5rem; }
+    .stat-card:nth-child(1) { margin-left: -140px; }
+    .stat-card:nth-child(2) { margin-left: 100px; }
+    .stat-card:nth-child(3) { margin-left: -120px; }
+    .about-grid, .order-container, .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .about-features { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#home" class="logo">
+    <div class="logo-icon">🐄</div>
+    <div>
+      <div class="logo-text">Jeet <span>Dairy</span></div>
+      <div class="logo-sub">Fresh & Pure</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-order-btn" onclick="scrollToOrder()">🛒 Order Now</button>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="toggleMenu()">🏠 Home</a>
+  <a href="#products" onclick="toggleMenu()">🥛 Products</a>
+  <a href="#order" onclick="toggleMenu()">📦 Order</a>
+  <a href="#about" onclick="toggleMenu()">ℹ️ About</a>
+  <a href="#contact" onclick="toggleMenu()">📞 Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-badge">🌿 100% Pure & Natural</div>
+    <h1 class="hero-title">
+      Shudh Doodh,<br>
+      <span class="highlight">Ghar Tak Pahunche</span>
+    </h1>
+    <p class="hero-desc">
+      Jeet Dairy se paye bilkul fresh cow milk aur dairy products — seedha farm se aapke ghar tak. Koi milawat nahi, sirf shuddhata.
+    </p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">🥛 Products Dekho</a>
+      <a href="#order" class="btn-secondary">📦 Order Karo</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-circle">🐄</div>
+    <div class="hero-stats" style="position:absolute; right: 0; display: flex; flex-direction: column; gap: 15px;">
+      <div class="stat-card" style="position:relative; margin-left: -280px;">
+        <span class="stat-icon">⭐</span>
+        <div><div class="stat-num">4.9/5</div><div class="stat-label">Customer Rating</div></div>
+      </div>
+      <div class="stat-card" style="position:relative; margin-left: 50px;">
+        <span class="stat-icon">🏠</span>
+        <div><div class="stat-num">500+</div><div class="stat-label">Happy Families</div></div>
+      </div>
+      <div class="stat-card" style="position:relative; margin-left: -220px;">
+        <span class="stat-icon">🐄</span>
+        <div><div class="stat-num">100%</div><div class="stat-label">Pure Cow Milk</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <h2 class="section-title">Hamare Products</h2>
+  <div class="gold-line"></div>
+  <p class="section-subtitle">Farm-fresh dairy products — shudh, tasty aur nutritious</p>
+
+  <div class="filter-tabs">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
+    <button class="filter-btn" onclick="filterProducts('milk', this)">🥛 Milk</button>
+    <button class="filter-btn" onclick="filterProducts('paneer', this)">🧀 Paneer & Cheese</button>
+    <button class="filter-btn" onclick="filterProducts('ghee', this)">🫙 Ghee & Butter</button>
+    <button class="filter-btn" onclick="filterProducts('curd', this)">🥣 Curd & Lassi</button>
+    <button class="filter-btn" onclick="filterProducts('sweet', this)">🍮 Mithai</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- ORDER -->
+<section id="order">
+  <h2 class="section-title">Home Delivery Order</h2>
+  <div class="gold-line"></div>
+  <p class="section-subtitle">Apna order place karo — hum seedha aapke ghar pahunchayenge</p>
+
+  <div class="order-container">
+    <div class="order-form">
+      <h3>🛒 Order Form</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Aapka Naam *</label>
+          <input type="text" id="orderName" placeholder="Full name" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="orderPhone" placeholder="10-digit number" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Delivery Address *</label>
+        <textarea id="orderAddress" placeholder="Ghar ka poora address likho..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Product *</label>
+          <select id="orderProduct">
+            <option value="">-- Select Product --</option>
+            <option>Cow Full Cream Milk (1L) - ₹60</option>
+            <option>Cow Toned Milk (1L) - ₹50</option>
+            <option>Buffalo Milk (1L) - ₹65</option>
+            <option>A2 Desi Cow Milk (1L) - ₹80</option>
+            <option>Fresh Paneer (500g) - ₹120</option>
+            <option>Malai Paneer (200g) - ₹60</option>
+            <option>Desi Ghee (500g) - ₹350</option>
+            <option>White Butter (200g) - ₹80</option>
+            <option>Fresh Dahi (500g) - ₹45</option>
+            <option>Sweet Lassi (250ml) - ₹30</option>
+            <option>Chaach / Buttermilk (500ml) - ₹25</option>
+            <option>Malai Khoya (500g) - ₹180</option>
+            <option>Fresh Cream (200ml) - ₹70</option>
+            <option>Rabri (250g) - ₹90</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" id="orderQty" placeholder="1" min="1" value="1" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Delivery Time Preference</label>
+        <select id="orderTime">
+          <option>Subah 6-9 baje (Morning)</option>
+          <option>Subah 9-12 baje (Late Morning)</option>
+          <option>Dopahar 12-3 baje (Afternoon)</option>
+          <option>Shaam 5-8 baje (Evening)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Special Instructions</label>
+        <textarea id="orderNotes" placeholder="Koi special instruction ho to likho..." style="min-height:60px;"></textarea>
+      </div>
+      <button class="submit-btn" onclick="placeOrder()">📦 Order Place Karo</button>
+    </div>
+
+    <div class="order-info">
+      <div class="info-card">
+        <span class="info-icon">🚀</span>
+        <div>
+          <div class="info-title">Same Day Delivery</div>
+          <div class="info-desc">Subah 10 baje tak order karo, usi din delivery pao. Evening orders kal subah pahunch jaate hain.</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">💰</span>
+        <div>
+          <div class="info-title">Free Delivery</div>
+          <div class="info-desc">₹200 se upar ke orders par FREE delivery. ₹200 se kam ke orders par sirf ₹20 delivery charge.</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🥛</span>
+        <div>
+          <div class="info-title">Daily Subscription</div>
+          <div class="info-desc">Daily milk subscription lene par har mahine 10% discount milega. Kabhi bhi cancel kar sakte ho.</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">💳</span>
+        <div>
+          <div class="info-title">Payment Options</div>
+          <div class="info-desc">Cash on Delivery, UPI (PhonePe, GPay, Paytm) — sabhi options available hain.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">🐄</div>
+    <div class="about-text">
+      <h2>Jeet Dairy ke baare mein</h2>
+      <p>
+        Hum ek family-owned dairy farm hain jo pichle 20 saalon se apne customers ko fresh aur pure dairy products provide kar rahe hain. Hamare saare products seedhe hamare farm ki healthy gayon se aate hain.
+      </p>
+      <p>
+        Hamare farm mein gayon ki achi dekhbhal ki jaati hai — unhe fresh grass, clean water aur proper care milti hai. Yahi wajah hai ki haara doodh itna tasty aur nutritious hota hai.
+      </p>
+      <div class="about-features">
+        <div class="feature-item"><span>✅</span><span>No Adulteration</span></div>
+        <div class="feature-item"><span>🌿</span><span>Organic Feed</span></div>
+        <div class="feature-item"><span>🧪</span><span>Quality Tested</span></div>
+        <div class="feature-item"><span>❄️</span><span>Cold Chain</span></div>
+        <div class="feature-item"><span>🐄</span><span>Desi Cow Milk</span></div>
+        <div class="feature-item"><span>📅</span><span>Daily Fresh</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="section-title">Humse Sampark Karo</h2>
+  <div class="gold-line" style="background: linear-gradient(90deg, var(--gold), var(--gold-light));"></div>
+  <p class="section-subtitle">Koi bhi sawaal ho, hum hamesha available hain</p>
+
+  <div class="contact-grid">
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Aapka Naam</label>
+        <input type="text" id="contactName" placeholder="Naam likho..." />
+      </div>
+      <div class="form-group">
+        <label>Phone / Email</label>
+        <input type="text" id="contactEmail" placeholder="Phone ya email..." />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="contactMsg" placeholder="Apna message likho..." style="min-height:100px;"></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendMessage()">📨 Message Bhejo</button>
+    </div>
+
+    <div class="contact-details">
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:9161040386" style="color:inherit;">+91 91610 40386</a><br><a href="mailto:jeet9455410309@gmail.com" style="color:var(--gold-light);">jeet9455410309@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Farm Location</div>
+          <div class="contact-value">Jeet Dairy Farm, Uttar Pradesh, India<br><a href="https://maps.google.com/?q=Jeet+Dairy+Farm+Uttar+Pradesh" target="_blank" style="color:var(--gold-light); font-weight:700;">📍 Google Maps pe Dekho →</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <div>
+          <div class="contact-label">Timing</div>
+          <div class="contact-value">Monday - Sunday<br>Subah 5 baje se Raat 9 baje tak</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📱</span>
+        <div>
+          <div class="contact-label">WhatsApp Order</div>
+          <div class="contact-value">WhatsApp pe bhi order kar sakte ho<br><a href="https://wa.me/919511091167" target="_blank" style="color:var(--gold-light); font-weight:700;">+91 95110 91167 → Chat Karo</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🐄 Jeet Dairy</div>
+  <p>Fresh & Pure Dairy Products | Farm to Home<br>
+  © 2024 Jeet Dairy. All Rights Reserved. | Made with ❤️ for our customers</p>
+</footer>
+
+<!-- CART WIDGET -->
+<button class="cart-widget" onclick="openCart()">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">🛒 Your Cart</span>
+      <button class="modal-close" onclick="closeCart()">✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal"></div>
+    <button class="submit-btn" onclick="checkoutCart()" style="margin-top:20px;">✅ Checkout Karo</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== PRODUCTS DATA =====
+const products = [
+  { id:1, name:"Cow Full Cream Milk", desc:"Fresh, thick & creamy — seedha farm se", price:"₹60/L", emoji:"🥛", bg:"bg-cream", cat:"milk", badge:"Fresh" },
+  { id:2, name:"Cow Toned Milk", desc:"Low-fat, healthy aur nutritious daily milk", price:"₹50/L", emoji:"🐄", bg:"bg-blue", cat:"milk", badge:"Hot", badgeType:"hot" },
+  { id:3, name:"Buffalo Milk", desc:"Extra thick, high-fat milk, chai ke liye best", price:"₹65/L", emoji:"🌾", bg:"bg-cream", cat:"milk", badge:"Popular" },
+  { id:4, name:"A2 Desi Cow Milk", desc:"Rare A2 protein, sabse nutritious doodh", price:"₹80/L", emoji:"⭐", bg:"bg-yellow", cat:"milk", badge:"Premium" },
+  { id:5, name:"Fresh Paneer", desc:"Soft, fresh paneer — roz subah bana hua", price:"₹120/500g", emoji:"🧀", bg:"bg-cream", cat:"paneer", badge:"Fresh" },
+  { id:6, name:"Malai Paneer", desc:"Extra creamy paneer for special dishes", price:"₹160/500g", emoji:"✨", bg:"bg-pink", cat:"paneer", badge:"Special" },
+  { id:7, name:"Desi Ghee", desc:"Pure cow ghee, traditional bilona method se", price:"₹350/500g", emoji:"🫙", bg:"bg-yellow", cat:"ghee", badge:"Pure" },
+  { id:8, name:"White Butter (Makhan)", desc:"Fresh homemade butter — dil kush kar de", price:"₹80/200g", emoji:"🧈", bg:"bg-cream", cat:"ghee", badge:"Fresh" },
+  { id:9, name:"Fresh Dahi (Curd)", desc:"Thick, tangy, probiotic-rich homemade curd", price:"₹45/500g", emoji:"🥣", bg:"bg-blue", cat:"curd", badge:"Daily" },
+  { id:10, name:"Sweet Lassi", desc:"Chilled, sweet lassi — garmi mein best", price:"₹30/250ml", emoji:"🥤", bg:"bg-pink", cat:"curd", badge:"Cold", badgeType:"new" },
+  { id:11, name:"Chaach / Buttermilk", desc:"Light, refreshing buttermilk with masala", price:"₹25/500ml", emoji:"🫗", bg:"bg-green", cat:"curd", badge:"Healthy" },
+  { id:12, name:"Malai Khoya", desc:"Rich, dense khoya for mithai aur desserts", price:"₹180/500g", emoji:"🍮", bg:"bg-orange", cat:"sweet", badge:"Pure" },
+  { id:13, name:"Fresh Cream", desc:"Light whipping cream for desserts", price:"₹70/200ml", emoji:"🍦", bg:"bg-cream", cat:"sweet", badge:"Fresh" },
+  { id:14, name:"Rabri", desc:"Traditional thickened sweetened milk", price:"₹90/250g", emoji:"🍬", bg:"bg-yellow", cat:"sweet", badge:"Traditional" },
+  { id:15, name:"Milk Cake (Kalakand)", desc:"Soft, melt-in-mouth pure milk cake", price:"₹200/500g", emoji:"🎂", bg:"bg-pink", cat:"sweet", badge:"Homemade", badgeType:"new" },
+  { id:16, name:"Shrikhand", desc:"Creamy hung curd dessert with kesar", price:"₹120/250g", emoji:"🌸", bg:"bg-orange", cat:"sweet", badge:"Special" },
+];
+
+let cart = [];
+
+function renderProducts(filter = 'all') {
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card" data-cat="${p.cat}">
+      <div class="product-img ${p.bg}">
+        <span>${p.emoji}</span>
+        <span class="product-badge ${p.badgeType || ''}">${p.badge}</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div class="product-price">${p.price}</div>
+          <button class="add-cart-btn" onclick="addToCart(${p.id})">+ Add</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(cat);
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) { existing.qty++; }
+  else { cart.push({ ...product, qty: 1 }); }
+  updateCartCount();
+  showToast(`✅ ${product.name} cart mein add hua!`);
+}
+
+function updateCartCount() {
+  const total = cart.reduce((a, i) => a + i.qty, 0);
+  const countEl = document.getElementById('cartCount');
+  countEl.textContent = total;
+  countEl.style.display = total > 0 ? 'flex' : 'none';
+}
+
+function openCart() {
+  document.getElementById('cartModal').classList.add('active');
+  renderCart();
+}
+function closeCart() {
+  document.getElementById('cartModal').classList.remove('active');
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="cart-empty">🛒<br><p style="font-size:1rem; margin-top:10px; color:#8B5E3C;">Cart khali hai!</p></div>';
+    totalEl.innerHTML = '';
+    return;
+  }
+  container.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div>
+        <div class="cart-item-name">${item.emoji} ${item.name}</div>
+        <div style="font-size:0.8rem; color:#8B5E3C;">Qty: ${item.qty}</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="cart-item-price">${item.price}</span>
+        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">🗑</button>
+      </div>
+    </div>
+  `).join('');
+  totalEl.innerHTML = `<span>Total Items:</span><span>${cart.reduce((a,i)=>a+i.qty,0)} items</span>`;
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartCount();
+  renderCart();
+}
+
+function checkoutCart() {
+  if (cart.length === 0) { showToast('❌ Pehle kuch add karo!'); return; }
+  closeCart();
+  document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  showToast('📋 Order form mein details bhar do!');
+}
+
+function placeOrder() {
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const address = document.getElementById('orderAddress').value.trim();
+  const product = document.getElementById('orderProduct').value;
+
+  if (!name || !phone || !address || !product) {
+    showToast('❌ Sabhi * fields bharna zaroori hai!');
+    return;
+  }
+  if (phone.length < 10) {
+    showToast('❌ Valid phone number do (10 digits)!');
+    return;
+  }
+
+  showToast(`🎉 Order place ho gaya! ${name} ji, hum jald aapke ghar pahunchenge!`);
+  document.getElementById('orderName').value = '';
+  document.getElementById('orderPhone').value = '';
+  document.getElementById('orderAddress').value = '';
+  document.getElementById('orderProduct').value = '';
+  document.getElementById('orderNotes').value = '';
+  document.getElementById('orderQty').value = '1';
+  cart = [];
+  updateCartCount();
+}
+
+function sendMessage() {
+  const name = document.getElementById('contactName').value.trim();
+  const msg = document.getElementById('contactMsg').value.trim();
+  if (!name || !msg) { showToast('❌ Naam aur message dono bharo!'); return; }
+  showToast(`✅ Message mil gaya ${name} ji! Hum jald reply karenge.`);
+  document.getElementById('contactName').value = '';
+  document.getElementById('contactEmail').value = '';
+  document.getElementById('contactMsg').value = '';
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+function scrollToOrder() {
+  document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleMenu() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+
+// Close modal on overlay click
+document.getElementById('cartModal').addEventListener('click', function(e) {
+  if (e.target === this) closeCart();
+});
+
+// Init
+renderProducts();
+</script>
+</body>
+</html>
